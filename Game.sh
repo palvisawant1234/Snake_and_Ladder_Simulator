@@ -3,7 +3,6 @@
 POSITION=0
 option(){
 	CHOICE=$((RANDOM % 3))
-	echo $CHOICE
 	if [ $CHOICE -eq 2 ]
 	then
 		echo "Ladder"
@@ -19,8 +18,16 @@ option(){
 dice()
 {
         dieRoll=$((RANDOM % 6 + 1))
-        echo "You got $dieRoll"
+        echo "You got : $dieRoll"
 	option
 }
-dice
-echo Your position is:$POSITION
+while [ $POSITION -le 100 ]
+do
+	dice
+	if [ $POSITION -lt 0 ]
+	then
+		POSITION=0
+	fi
+	echo Your position is:$POSITION
+done
+echo "You won the game"
