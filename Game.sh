@@ -1,6 +1,8 @@
 #!/bin/bash -x
 
 POSITION=0
+declare -A gamePlay
+dieRollCount=1
 option(){
 	CHOICE=$((RANDOM % 3))
 	if [ $CHOICE -eq 2 ]
@@ -23,6 +25,7 @@ dice()
 }
 while [ $POSITION -le 100 ]
 do
+	echo $dieRollCount
 	dice
 	if [ $POSITION -lt 0 ]
 	then
@@ -30,6 +33,7 @@ do
 	fi
 	if [ $POSITION -eq 100 ]
 	then
+		gamePlay[$dieRollCount]=100
 		echo "Your position is 100"
 		echo "You won!!!"
 		exit
@@ -38,6 +42,8 @@ do
 	then
 		POSITION=$(($POSITION - $dieRoll))
 	fi
+	gamePlay[$dieRollCount]=$POSITION
 	echo Your position is:$POSITION
+	dieRollCount=$(($dieRollCount + 1))
 done
 
