@@ -28,6 +28,16 @@ do
 	then
 		POSITION=0
 	fi
+	if [ $POSITION -eq 100 ]
+	then
+		echo "Your position is 100"
+		echo "You won!!!"
+		exit
+	fi
+	if [ $POSITION -gt 100 ]
+	then
+		POSITION=$(($POSITION - $dieRoll))
+	fi
 	echo Your position is:$POSITION
 done
-echo "You won the game"
+
